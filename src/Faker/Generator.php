@@ -554,6 +554,18 @@ use Psr\Container\ContainerInterface;
  *
  * @method string linuxPlatformToken()
  *
+ * @property string state
+ *
+ * @method string state()
+ *
+ * @property string stateAbbr
+ *
+ * @method string stateAbbr()
+ *
+ * @property string taxId
+ *
+ * @method string taxId()
+ *
  * @property string $uuid
  *
  * @method string uuid()
