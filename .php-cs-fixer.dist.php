@@ -8,12 +8,20 @@ $finder = PhpCsFixer\Finder::create()
         '.github/',
         'vendor-bin/',
     ])
+    ->notPath([
+        'test/Fixture/Enum/BackedEnum.php',
+    ])
     ->ignoreDotFiles(false)
     ->in(__DIR__);
 
 $config = new PhpCsFixer\Config('faker');
 
+if (!is_dir('.build/php-cs-fixer')) {
+    mkdir('.build/php-cs-fixer', 0755, true);
+}
+
 return $config
+    ->setCacheFile('.build/php-cs-fixer/cache')
     ->setFinder($finder)
     ->setRiskyAllowed(true)
     ->setRules([
@@ -46,9 +54,6 @@ return $config
                 'yield',
             ],
         ],
-        'braces' => [
-            'allow_single_line_anonymous_class_with_empty_body' => true,
-        ],
         'cast_spaces' => true,
         'class_attributes_separation' => [
             'elements' => [
@@ -60,7 +65,11 @@ return $config
         'concat_space' => [
             'spacing' => 'one',
         ],
+        'control_structure_braces' => true,
+        'control_structure_continuation_position' => true,
+        'curly_braces_position' => true,
         'declare_equal_normalize' => true,
+        'declare_parentheses' => true,
         'function_typehint_space' => true,
         'general_phpdoc_annotation_remove' => [
             'annotations' => [
@@ -94,10 +103,15 @@ return $config
         'no_extra_blank_lines' => true,
         'no_leading_import_slash' => true,
         'no_leading_namespace_whitespace' => true,
+        'no_multiple_statements_per_line' => true,
         'no_spaces_around_offset' => true,
         'no_superfluous_elseif' => true,
         'no_superfluous_phpdoc_tags' => true,
-        'no_trailing_comma_in_singleline_array' => true,
+        'no_trailing_comma_in_singleline' => [
+            'elements' => [
+                'array',
+            ],
+        ],
         'no_unneeded_control_parentheses' => true,
         'no_unneeded_curly_braces' => true,
         'no_unneeded_final_method' => true,
@@ -165,6 +179,7 @@ return $config
         ],
         'phpdoc_var_without_name' => true,
         'pow_to_exponentiation' => true,
+        'protected_to_private' => true,
         'psr_autoloading' => true,
         'random_api_migration' => true,
         'return_assignment' => true,
@@ -174,8 +189,24 @@ return $config
         'single_blank_line_before_namespace' => true,
         'single_line_comment_style' => true,
         'single_quote' => true,
+        'single_space_around_construct' => [
+            'constructs_contain_a_single_space' => [],
+            'constructs_followed_by_a_single_space' => [
+                'elseif',
+                'for',
+                'foreach',
+                'if',
+                'match',
+                'while',
+                'use_lambda',
+            ],
+            'constructs_preceded_by_a_single_space' => [
+                'use_lambda',
+            ],
+        ],
         'single_trait_insert_per_statement' => true,
         'standardize_not_equals' => true,
+        'statement_indentation' => true,
         'static_lambda' => true,
         'strict_param' => true,
         'switch_case_space' => true,
@@ -183,6 +214,7 @@ return $config
         'ternary_to_null_coalescing' => true,
         'trailing_comma_in_multiline' => [
             'elements' => [
+                'arguments',
                 'arrays',
             ],
         ],
@@ -195,5 +227,6 @@ return $config
                 'property',
             ],
         ],
+        'void_return' => false,
         'whitespace_after_comma_in_array' => true,
     ]);

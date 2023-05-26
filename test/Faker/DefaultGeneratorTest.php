@@ -9,7 +9,7 @@ final class DefaultGeneratorTest extends TestCase
     /**
      * @group legacy
      */
-    public function testGeneratorReturnsNullByDefault()
+    public function testGeneratorReturnsNullByDefault(): void
     {
         $generator = new DefaultGenerator();
         self::assertNull($generator->value);
@@ -18,14 +18,17 @@ final class DefaultGeneratorTest extends TestCase
     /**
      * @group legacy
      */
-    public function testGeneratorReturnsDefaultValueForAnyPropertyGet()
+    public function testGeneratorReturnsDefaultValueForAnyPropertyGet(): void
     {
         $generator = new DefaultGenerator(123);
         self::assertSame(123, $generator->foo);
         self::assertNotNull($generator->bar);
     }
 
-    public function testGeneratorReturnsDefaultValueForAnyMethodCall()
+    /**
+     * @group legacy
+     */
+    public function testGeneratorReturnsDefaultValueForAnyMethodCall(): void
     {
         $generator = new DefaultGenerator(123);
         self::assertSame(123, $generator->foobar());
